@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">ToasterExample</string>
+    <string name="show_toast_label">Show toast</string>
+    <string name="show_toast_using_builder_label">Show toast using Builder</string>
+    <string name="show_error_toast_label">Show Error toast</string>
+    <string name="show_warning_toast_label">Show Warning toast</string>
 </resources>
