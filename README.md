@@ -54,7 +54,7 @@ It has some predefined templates for common use-cases like warning, error and su
             ).show()
   ```
   
-  ## How to Contribute
+  ## Contributing
   - For contributions in this repository, please read [Contribution guidelines for this project](docs/CONTRIBUTING.md) first. (Please pull the changes from this repo if you have already forked the repository and are facing conflicts)
   - If you like the repository, please star it.
   
