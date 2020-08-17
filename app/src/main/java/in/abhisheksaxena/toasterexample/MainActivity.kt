@@ -3,7 +3,6 @@ package `in`.abhisheksaxena.toasterexample
 import `in`.abhisheksaxena.toaster.Toaster
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.widget.Toast
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -12,12 +11,25 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val message = "Some message"
-        Toast.makeText(this, message, Toast.LENGTH_SHORT).show()
         button.setOnClickListener {
             Toaster.pop(
                 this,
                 message,
-                R.drawable.ic_baseline_all_inclusive_24
+                Toaster.LENGTH_SHORT
+            ).show()
+        }
+
+        builder_button.setOnClickListener {
+            val toastBuilder = Toaster.Builder(this)
+                .setMessage("Some default message")
+            Toaster.pop(toastBuilder.make()).show()
+        }
+
+        error_button.setOnClickListener {
+            Toaster.popError(
+                this,
+                "This is an error message",
+                Toaster.LENGTH_SHORT
             ).show()
         }
     }
