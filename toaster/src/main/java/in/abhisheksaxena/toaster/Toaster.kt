@@ -52,6 +52,14 @@ class Toaster private constructor(
             return toast
         }
 
+        fun popError(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toast {
+            return pop(prepareError(context, message, duration))
+        }
+
         private fun prepare(context: Context, message: CharSequence, duration: Int): Toaster {
             return Builder(context)
                 .setMessage(message)
@@ -72,6 +80,15 @@ class Toaster private constructor(
                         setLeftDrawable(it)
                     }
                 }
+                .setDuration(duration)
+                .make()
+        }
+
+        private fun prepareError(context: Context, message: CharSequence, duration: Int): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .setLeftDrawable(R.drawable.ic_baseline_error_24)
+                .setLeftDrawableTint(Colors.ERROR)
                 .setDuration(duration)
                 .make()
         }
@@ -124,6 +141,12 @@ class Toaster private constructor(
                 it.rootView = rootView
                 it.leftDrawableRes = leftDrawableRes
             }
+        }
+    }
+
+    private interface Colors{
+        companion object{
+            internal val ERROR = R.color.red
         }
     }
 }
