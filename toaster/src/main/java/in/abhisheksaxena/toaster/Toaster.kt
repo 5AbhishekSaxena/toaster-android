@@ -60,6 +60,14 @@ class Toaster private constructor(
             return pop(prepareError(context, message, duration))
         }
 
+        fun popWarning(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toast {
+            return pop(prepareWarning(context, message, duration))
+        }
+
         private fun prepare(context: Context, message: CharSequence, duration: Int): Toaster {
             return Builder(context)
                 .setMessage(message)
@@ -89,6 +97,17 @@ class Toaster private constructor(
                 .setMessage(message)
                 .setLeftDrawable(R.drawable.ic_baseline_error_24)
                 .setLeftDrawableTint(Colors.ERROR)
+                .setStripTint(Colors.ERROR)
+                .setDuration(duration)
+                .make()
+        }
+
+        private fun prepareWarning(context: Context, message: CharSequence, duration: Int): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .setLeftDrawable(R.drawable.ic_baseline_warning_24)
+                .setLeftDrawableTint(Colors.WARNING)
+                .setStripTint(Colors.WARNING)
                 .setDuration(duration)
                 .make()
         }
@@ -98,8 +117,9 @@ class Toaster private constructor(
 
         private val rootView: View
         private var messageTextView: TextView? = null
-        private var leftDrawable: ImageView? = null
+        private var leftDrawableImageView: ImageView? = null
         private var leftDrawableRes: Int? = null
+        private var colorStripView: View? = null
 
         private var message: CharSequence = ""
         private var duration: Int = LENGTH_SHORT
@@ -114,7 +134,10 @@ class Toaster private constructor(
             val rootView = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
 
             messageTextView = rootView.findViewById(R.id.message_text_view)
-            leftDrawable = rootView.findViewById(R.id.left_drawable_image_view)
+            leftDrawableImageView = rootView.findViewById(R.id.left_drawable_image_view)
+            colorStripView = rootView.findViewById(R.id.color_strip_view)
+
+            setInitViewProperties()
 
             return rootView
         }
@@ -122,11 +145,13 @@ class Toaster private constructor(
         fun setMessage(message: CharSequence) = apply {
             this.message = message
             messageTextView?.text = message
+            messageTextView?.visibility = View.VISIBLE
         }
 
         fun setLeftDrawable(leftDrawableRes: Int) = apply {
             this.leftDrawableRes = leftDrawableRes
-            leftDrawable?.setImageResource(leftDrawableRes)
+            leftDrawableImageView?.setImageResource(leftDrawableRes)
+            leftDrawableImageView?.visibility = View.VISIBLE
         }
 
         fun setDuration(duration: Int) = apply {
@@ -134,7 +159,13 @@ class Toaster private constructor(
         }
 
         fun setLeftDrawableTint(colorRes: Int) = apply {
-            this.leftDrawable?.setColorFilter(ContextCompat.getColor(context, colorRes))
+            leftDrawableImageView?.setColorFilter(ContextCompat.getColor(context, colorRes))
+            leftDrawableImageView?.visibility = View.VISIBLE
+        }
+
+        fun setStripTint(colorRes: Int) = apply {
+            colorStripView?.setBackgroundColor(ContextCompat.getColor(this.context, colorRes))
+            colorStripView?.visibility = View.VISIBLE
         }
 
         fun make(): Toaster {
@@ -143,11 +174,18 @@ class Toaster private constructor(
                 it.leftDrawableRes = leftDrawableRes
             }
         }
+
+        private fun setInitViewProperties() {
+            colorStripView?.visibility = View.GONE
+            leftDrawableImageView?.visibility = View.GONE
+            messageTextView?.visibility = View.GONE
+        }
     }
 
-    private interface Colors{
-        companion object{
+    private interface Colors {
+        companion object {
             internal val ERROR = R.color.red
+            internal val WARNING = R.color.dirty_yellow
         }
     }
 }

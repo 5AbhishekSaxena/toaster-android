@@ -32,5 +32,13 @@ class MainActivity : AppCompatActivity() {
                 Toaster.LENGTH_SHORT
             ).show()
         }
+
+        warning_button.setOnClickListener {
+            Toaster.popWarning(
+                this,
+                "This is a warning message",
+                Toaster.LENGTH_SHORT
+            ).show()
+        }
     }
 }
