@@ -29,18 +29,18 @@ object Toaster {
 
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-            val view = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
+            val rootView = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
 
-            val messageTextView = view.findViewById<TextView>(R.id.message_text_view)
+            val messageTextView = rootView.findViewById<TextView>(R.id.message_text_view)
             messageTextView.text = message
 
-            val leftDrawable = view.findViewById<ImageView>(R.id.left_drawable_image_view)
+            val leftDrawable = rootView.findViewById<ImageView>(R.id.left_drawable_image_view)
             drawableRes?.let {
                 leftDrawable.setImageResource(it)
             }
 
             toast.duration = duration
-            toast.view = view
+            toast.view = rootView
             return toast
         }
 }
