@@ -50,9 +50,12 @@ It has some predefined templates for common use-cases like warning, error and su
   Toaster.pop(
                 this,
                 message,
-                R.drawable.ic_baseline_all_inclusive_24 /* image */
+                R.drawable.ic_baseline_check_circle_24 /* image */
             ).show()
   ```
+  
+  <img src="https://user-images.githubusercontent.com/19958130/90441978-7dc7a000-e0f7-11ea-8d6f-d6dd7b0c9146.jpeg" width="240">
+  
   
   ### Code Snippets
   ##### Using templates
@@ -64,6 +67,9 @@ It has some predefined templates for common use-cases like warning, error and su
                 Toaster.LENGTH_SHORT
             ).show()
   ```
+  
+  <img src="https://user-images.githubusercontent.com/19958130/90441972-7a341900-e0f7-11ea-87f9-1cd10c912167.jpeg" width="240">
+  
   - Warning
   ```
   	Toaster.popWarning(
@@ -72,6 +78,9 @@ It has some predefined templates for common use-cases like warning, error and su
                 Toaster.LENGTH_SHORT
             ).show()
   ```
+  
+  <img src="https://user-images.githubusercontent.com/19958130/90441973-7bfddc80-e0f7-11ea-902c-0944e4499c5d.jpeg" width="240">
+  
   ##### Custom Toast
   1. Create a toast buidler
   ```
@@ -85,6 +94,7 @@ It has some predefined templates for common use-cases like warning, error and su
   ```
       Toaster.pop(toastBuilder.make()).show()
   ```
+  <img src="https://user-images.githubusercontent.com/19958130/90441968-7902ec00-e0f7-11ea-9c2a-eb095654bec9.jpeg" width="240">
     
  ## Contributing
   - For contributions in this repository, please read [Contribution guidelines for this project](docs/CONTRIBUTING.md) first. (Please pull the changes from this repo if you have already forked the repository and are facing conflicts)
