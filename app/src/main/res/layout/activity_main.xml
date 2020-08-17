@@ -10,10 +10,45 @@
         android:id="@+id/button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Show toast"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:text="@string/show_toast_label"
+        app:layout_constraintBottom_toTopOf="@id/builder_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_chainStyle="packed" />
+
+    <Button
+        android:id="@+id/builder_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/margin_default"
+        android:text="@string/show_toast_using_builder_label"
+        app:layout_constraintBottom_toTopOf="@id/error_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/button" />
+
+    <Button
+        android:id="@+id/error_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_error_toast_label"
+        android:layout_marginBottom="@dimen/margin_default"
+        app:layout_constraintBottom_toTopOf="@id/warning_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/builder_button" />
+
+    <Button
+        android:id="@+id/warning_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/show_warning_toast_label"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@id/error_button" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
