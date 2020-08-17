@@ -9,9 +9,17 @@
         android:id="@+id/constraint_layout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:paddingTop="@dimen/margin_default"
-        android:paddingBottom="@dimen/margin_default">
+        android:layout_gravity="center_horizontal">
+
+        <View
+            android:id="@+id/color_strip_view"
+            android:layout_width="4dp"
+            android:layout_height="0dp"
+            tools:background="@color/red"
+            app:layout_constrainedWidth="true"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <ImageView
             android:id="@+id/left_drawable_image_view"
@@ -19,9 +27,11 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_01"
             android:adjustViewBounds="true"
+            android:paddingTop="@dimen/margin_default"
+            android:paddingBottom="@dimen/margin_default"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintStart_toEndOf="@id/color_strip_view"
             app:layout_constraintTop_toTopOf="parent"
             tools:src="@drawable/ic_android_black_24dp" />
 
