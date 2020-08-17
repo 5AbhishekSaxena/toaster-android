@@ -15,15 +15,15 @@
 
         <ImageView
             android:id="@+id/left_drawable_image_view"
-            android:layout_width="wrap_content"
+            android:layout_width="24dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_01"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
-            android:src="@drawable/ic_android_black_24dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_android_black_24dp" />
 
         <TextView
             android:id="@+id/message_text_view"
@@ -31,12 +31,12 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/margin_01"
             android:layout_marginEnd="@dimen/margin_01"
-            tools:text="Some message"
             android:textStyle="bold"
             app:layout_constrainedWidth="true"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/left_drawable_image_view"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Some message" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>
