@@ -21,8 +21,7 @@ class MainActivity : AppCompatActivity() {
 
         builder_button.setOnClickListener {
             val toastBuilder = Toaster.Builder(this)
-                .setMessage("some message 1")
-
+                .setMessage("Some default message")
             Toaster.pop(toastBuilder.make()).show()
         }
 
@@ -33,6 +32,5 @@ class MainActivity : AppCompatActivity() {
                 Toaster.LENGTH_SHORT
             ).show()
         }
-
     }
 }
