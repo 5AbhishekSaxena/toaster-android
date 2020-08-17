@@ -7,6 +7,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.content.ContextCompat
 
 
 /**
@@ -17,40 +18,79 @@ import androidx.constraintlayout.widget.ConstraintLayout
 class Toaster private constructor(
     private val context: Context,
     private var message: CharSequence,
-    private var drawableRes: Int?
+    private var duration: Int
 ) {
 
+    private var rootView: View? = null
+    private var leftDrawableRes: Int? = null
 
     companion object {
-        private var messageTextView: TextView? = null
-        private var leftDrawable: ImageView? = null
-        private lateinit var toast: Toast
         const val LENGTH_SHORT = Toast.LENGTH_SHORT
         const val LENGTH_LONG = Toast.LENGTH_LONG
 
         fun pop(
             context: Context,
             message: CharSequence,
-            drawableRes: Int? = null,
-            duration: Int = LENGTH_SHORT
+            duration: Int
         ): Toast {
-            val rootView = initView(context)
-            prepare(message, drawableRes)
-            toast.duration = duration
-            toast.view = rootView
-            return toast
+            return pop(prepare(context, message, duration))
+        }
+
+        fun pop(
+            context: Context,
+            message: CharSequence,
+            drawableRes: Int,
+            duration: Int
+        ): Toast {
+            return pop(prepare(context, message, drawableRes, duration))
         }
 
         fun pop(toaster: Toaster): Toast {
-            val rootView = initView(toaster.context)
-            prepare(toaster.message, toaster.drawableRes)
-            toast.view = rootView
+            val toast = Toast(toaster.context)
+            toast.duration = toaster.duration
+            toast.view = toaster.rootView
             return toast
         }
 
-        private fun initView(context: Context): View {
-            toast = Toast(context)
+        private fun prepare(context: Context, message: CharSequence, duration: Int): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .setDuration(duration)
+                .make()
+        }
 
+        private fun prepare(
+            context: Context,
+            message: CharSequence,
+            drawableRes: Int?,
+            duration: Int
+        ): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .apply {
+                    drawableRes?.let {
+                        setLeftDrawable(it)
+                    }
+                }
+                .setDuration(duration)
+                .make()
+        }
+    }
+
+    class Builder(private val context: Context) {
+
+        private var message: CharSequence = ""
+        private var leftDrawableRes: Int? = null
+        private var messageTextView: TextView? = null
+        private var leftDrawable: ImageView? = null
+        private val rootView: View
+        private var duration: Int = LENGTH_SHORT
+
+        init {
+            rootView = initView(context)
+        }
+
+        private fun initView(context: Context): View {
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val rootView = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
@@ -61,29 +101,29 @@ class Toaster private constructor(
             return rootView
         }
 
-        private fun prepare(message: CharSequence, drawableRes: Int?) {
-            messageTextView?.text = message
-            drawableRes?.let {
-                leftDrawable?.setImageResource(it)
-            }
-        }
-    }
-
-    class Builder(private val context: Context) {
-
-        private var message: CharSequence = ""
-        private var leftDrawableRes: Int? = null
-
         fun setMessage(message: CharSequence) = apply {
             this.message = message
+            messageTextView?.text = message
         }
 
         fun setLeftDrawable(leftDrawableRes: Int) = apply {
             this.leftDrawableRes = leftDrawableRes
+            leftDrawable?.setImageResource(leftDrawableRes)
+        }
+
+        fun setDuration(duration: Int) = apply {
+            this.duration = duration
+        }
+
+        fun setLeftDrawableTint(colorRes: Int) = apply {
+            this.leftDrawable?.setColorFilter(ContextCompat.getColor(context, colorRes))
         }
 
         fun make(): Toaster {
-            return Toaster(context, message, leftDrawableRes)
+            return Toaster(context, message, duration).also {
+                it.rootView = rootView
+                it.leftDrawableRes = leftDrawableRes
+            }
         }
     }
 }
