@@ -4,7 +4,7 @@
 ![GitHub](https://img.shields.io/github/license/5AbhishekSaxena/Toaster-Android)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/5AbhishekSaxena/toaster-Android)
 
-Toaster-Android is a simple open source library to customize toast messages in adnroid applications.
+Toaster-Android is a simple open source library to customize toast messages in android applications.
 It has some predefined templates for common use-cases like warning, error and success messages.
 
  ## Download
@@ -54,7 +54,39 @@ It has some predefined templates for common use-cases like warning, error and su
             ).show()
   ```
   
-  ## Contributing
+  ### Code Snippets
+  ##### Using templates
+  - Error
+  ```
+  	Toaster.popError(
+                this,
+                "This is an error message",
+                Toaster.LENGTH_SHORT
+            ).show()
+  ```
+  - Warning
+  ```
+  	Toaster.popWarning(
+                this,
+                "This is a warning message",
+                Toaster.LENGTH_SHORT
+            ).show()
+  ```
+  ##### Custom Toast
+  1. Create a toast buidler
+  ```
+        val toastBuilder = Toaster.Builder(requireContext())
+            .setMessage("Login Success")
+            .setLeftDrawable(R.drawable.ic_baseline_check_circle_24)
+            .setLeftDrawableTint(R.color.dirty_green)
+            .setStripTint(R.color.dirty_green)
+  ``` 
+  2. Add the builder to the `Toaster.pop`  
+  ```
+      Toaster.pop(toastBuilder.make()).show()
+  ```
+    
+ ## Contributing
   - For contributions in this repository, please read [Contribution guidelines for this project](docs/CONTRIBUTING.md) first. (Please pull the changes from this repo if you have already forked the repository and are facing conflicts)
   - If you like the repository, please star it.
   
