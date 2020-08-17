@@ -96,11 +96,12 @@ class Toaster private constructor(
 
     class Builder(private val context: Context) {
 
-        private var message: CharSequence = ""
-        private var leftDrawableRes: Int? = null
+        private val rootView: View
         private var messageTextView: TextView? = null
         private var leftDrawable: ImageView? = null
-        private val rootView: View
+        private var leftDrawableRes: Int? = null
+
+        private var message: CharSequence = ""
         private var duration: Int = LENGTH_SHORT
 
         init {
