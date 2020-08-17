@@ -25,7 +25,7 @@ It has some predefined templates for common use-cases like warning, error and su
  
   ```
  dependencies {
-	implementation 'com.github.5AbhishekSaxena:Toaster-Android:0.1.0-beta02'
+	implementation 'com.github.5AbhishekSaxena:Toaster-Android:0.1.0'
 }
    ```
   
