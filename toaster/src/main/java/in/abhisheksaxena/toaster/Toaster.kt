@@ -99,7 +99,7 @@ class Toaster private constructor(
 
         private val rootView: View
         private var messageTextView: TextView? = null
-        private var leftDrawable: ImageView? = null
+        private var leftDrawableImageView: ImageView? = null
         private var leftDrawableRes: Int? = null
         private var colorStripView: View? = null
 
@@ -116,8 +116,10 @@ class Toaster private constructor(
             val rootView = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
 
             messageTextView = rootView.findViewById(R.id.message_text_view)
-            leftDrawable = rootView.findViewById(R.id.left_drawable_image_view)
+            leftDrawableImageView = rootView.findViewById(R.id.left_drawable_image_view)
             colorStripView = rootView.findViewById(R.id.color_strip_view)
+
+            setInitViewProperties()
 
             return rootView
         }
@@ -125,11 +127,13 @@ class Toaster private constructor(
         fun setMessage(message: CharSequence) = apply {
             this.message = message
             messageTextView?.text = message
+            messageTextView?.visibility = View.VISIBLE
         }
 
         fun setLeftDrawable(leftDrawableRes: Int) = apply {
             this.leftDrawableRes = leftDrawableRes
-            leftDrawable?.setImageResource(leftDrawableRes)
+            leftDrawableImageView?.setImageResource(leftDrawableRes)
+            leftDrawableImageView?.visibility = View.VISIBLE
         }
 
         fun setDuration(duration: Int) = apply {
@@ -137,11 +141,13 @@ class Toaster private constructor(
         }
 
         fun setLeftDrawableTint(colorRes: Int) = apply {
-            this.leftDrawable?.setColorFilter(ContextCompat.getColor(context, colorRes))
+            leftDrawableImageView?.setColorFilter(ContextCompat.getColor(context, colorRes))
+            leftDrawableImageView?.visibility = View.VISIBLE
         }
 
         fun setStripTint(colorRes: Int) = apply {
-            this.colorStripView?.setBackgroundColor(ContextCompat.getColor(this.context, colorRes))
+            colorStripView?.setBackgroundColor(ContextCompat.getColor(this.context, colorRes))
+            colorStripView?.visibility = View.VISIBLE
         }
 
         fun make(): Toaster {
@@ -149,6 +155,12 @@ class Toaster private constructor(
                 it.rootView = rootView
                 it.leftDrawableRes = leftDrawableRes
             }
+        }
+
+        private fun setInitViewProperties() {
+            colorStripView?.visibility = View.GONE
+            leftDrawableImageView?.visibility = View.GONE
+            messageTextView?.visibility = View.GONE
         }
     }
 
