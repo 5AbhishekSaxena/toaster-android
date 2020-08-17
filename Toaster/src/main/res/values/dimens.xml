@@ -2,4 +2,5 @@
 <resources>
     <dimen name="margin_005">4dp</dimen>
     <dimen name="margin_01">8dp</dimen>
+    <dimen name="margin_default">16dp</dimen>
 </resources>
