@@ -24,14 +24,14 @@
         <ImageView
             android:id="@+id/left_drawable_image_view"
             android:layout_width="24dp"
-            android:layout_height="wrap_content"
+            android:layout_height="24dp"
             android:layout_marginStart="@dimen/margin_01"
             android:adjustViewBounds="true"
             android:scaleType="centerCrop"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/color_strip_view"
             app:layout_constraintTop_toTopOf="parent"
-            tools:src="@drawable/ic_android_black_24dp" />
+            tools:src="@drawable/ic_baseline_check_circle_24" />
 
         <TextView
             android:id="@+id/message_text_view"
