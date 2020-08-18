@@ -45,7 +45,7 @@ It has some predefined templates for common use-cases like warning, error and su
   With a custom drawable
   
   ```
-  val message = "Some Message" 
+  val message = "Login Success" 
   
   Toaster.pop(
                 this,
