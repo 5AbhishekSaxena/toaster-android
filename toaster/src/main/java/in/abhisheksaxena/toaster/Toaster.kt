@@ -77,10 +77,7 @@ class Toaster private constructor(
         }
 
         private fun prepare(context: Context, message: CharSequence, duration: Int): Toaster {
-            return Builder(context)
-                .setMessage(message)
-                .setDuration(duration)
-                .make()
+            return prepare(context, message, null, duration)
         }
 
         private fun prepare(
