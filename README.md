@@ -97,7 +97,7 @@ It has some predefined templates for common use-cases like warning, error and su
   <img src="https://user-images.githubusercontent.com/19958130/90441968-7902ec00-e0f7-11ea-9c2a-eb095654bec9.jpeg" width="240">
     
  ## Contributing
-  - For contributions in this repository, please read [Contribution guidelines for this project](docs/CONTRIBUTING.md) first. (Please pull the changes from this repo if you have already forked the repository and are facing conflicts)
+  - For contributions in this repository, please read [Contribution guidelines for this project](/CONTRIBUTING.md) first. (Please pull the changes from this repo if you have already forked the repository and are facing conflicts)
   - If you like the repository, please star it.
   
   ## License
