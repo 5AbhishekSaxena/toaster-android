@@ -40,5 +40,13 @@ class MainActivity : AppCompatActivity() {
                 Toaster.LENGTH_SHORT
             ).show()
         }
+
+        success_button.setOnClickListener {
+            Toaster.popSuccess(
+                this,
+                "This is a success message",
+                Toaster.LENGTH_SHORT
+            ).show()
+        }
     }
 }
