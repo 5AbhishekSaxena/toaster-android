@@ -9,19 +9,30 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-
-        val message = "Some message"
         button.setOnClickListener {
             Toaster.pop(
                 this,
-                message,
+                "A simple toast message",
+                Toaster.LENGTH_SHORT
+            ).show()
+        }
+
+        with_image_button.setOnClickListener {
+            Toaster.pop(
+                this,
+                "A simple toast message with image",
+                R.drawable.ic_baseline_cloud_done_24,
                 Toaster.LENGTH_SHORT
             ).show()
         }
 
         builder_button.setOnClickListener {
             val toastBuilder = Toaster.Builder(this)
-                .setMessage("Some default message")
+                .setMessage("File uploaded successfully")
+                .setLeftDrawable(R.drawable.ic_baseline_cloud_done_24)
+                .setLeftDrawableTint(R.color.blue)
+                .setStripTint(R.color.blue)
+                .setDuration(Toaster.LENGTH_SHORT)
             Toaster.pop(toastBuilder.make()).show()
         }
 
