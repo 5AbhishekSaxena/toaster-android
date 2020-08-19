@@ -3,7 +3,6 @@
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/5AbhishekSaxena/Toaster-Android?include_prereleases)
 ![GitHub](https://img.shields.io/github/license/5AbhishekSaxena/Toaster-Android)
 ![GitHub (Pre-)Release Date](https://img.shields.io/github/release-date-pre/5AbhishekSaxena/toaster-Android)
-![GitHub repo size](https://img.shields.io/github/repo-size/5AbhishekSaxena/toaster-Android)
 ![Language](https://img.shields.io/badge/Language-Kotlin-blue?style=flat&logo=kotlin)
 
 Toaster-Android is a simple open source library to customize toast messages in android applications.
