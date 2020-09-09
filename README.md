@@ -31,6 +31,10 @@ It has some predefined templates for common use-cases like warning, error and su
    ```
   
  ## How to use Toaster-Android
+  <a href="https://youtu.be/qUfnW1DZljM">
+         <img src="https://img.youtube.com/vi/qUfnW1DZljM/0.jpg" style="width:100%;">
+      </a>
+ 
   
   A simple use case will look like this
 
