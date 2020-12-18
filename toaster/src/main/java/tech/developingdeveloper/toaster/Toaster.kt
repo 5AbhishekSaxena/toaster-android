@@ -1,4 +1,4 @@
-package `in`.abhisheksaxena.toaster
+package tech.developingdeveloper.toaster
 
 import android.content.Context
 import android.view.LayoutInflater

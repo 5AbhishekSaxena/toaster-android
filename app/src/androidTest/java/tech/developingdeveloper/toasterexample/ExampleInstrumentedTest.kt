@@ -1,4 +1,4 @@
-package `in`.abhisheksaxena.toaster
+package tech.developingdeveloper.toasterexample
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4
@@ -19,6 +19,6 @@ class ExampleInstrumentedTest {
     fun useAppContext() {
         // Context of the app under test.
         val appContext = InstrumentationRegistry.getInstrumentation().targetContext
-        assertEquals("in.abhisheksaxena.toaster.test", appContext.packageName)
+        assertEquals("in.abhisheksaxena.toasterexample", appContext.packageName)
     }
 }

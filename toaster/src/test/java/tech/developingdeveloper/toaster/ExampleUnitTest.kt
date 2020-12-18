@@ -1,4 +1,4 @@
-package `in`.abhisheksaxena.toasterexample
+package tech.developingdeveloper.toaster
 
 import org.junit.Test
 

@@ -1,6 +1,6 @@
-package `in`.abhisheksaxena.toasterexample
+package tech.developingdeveloper.toasterexample
 
-import `in`.abhisheksaxena.toaster.Toaster
+import tech.developingdeveloper.toaster.Toaster
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import kotlinx.android.synthetic.main.activity_main.*
