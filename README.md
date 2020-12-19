@@ -26,7 +26,7 @@ It has some predefined templates for common use-cases like warning, error and su
  
   ```
  dependencies {
-	implementation 'com.github.5AbhishekSaxena:Toaster-Android:0.3.0'
+	implementation 'tech.developingdeveloper:Toaster-Android:0.3.0'
 }
    ```
   
@@ -65,9 +65,9 @@ It has some predefined templates for common use-cases like warning, error and su
   ##### Using templates
    - Success
   ```
-  	Toaster.popError(
+  	Toaster.popSuccess(
                 this,
-                "This is an error message",
+                "This is a success message",
                 Toaster.LENGTH_SHORT
             ).show()
   ```
