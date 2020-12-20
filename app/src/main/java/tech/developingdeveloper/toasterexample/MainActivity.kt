@@ -1,15 +1,18 @@
 package tech.developingdeveloper.toasterexample
 
-import tech.developingdeveloper.toaster.Toaster
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import kotlinx.android.synthetic.main.activity_main.*
+import androidx.appcompat.app.AppCompatActivity
+import tech.developingdeveloper.toaster.Toaster
+import tech.developingdeveloper.toasterexample.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        button.setOnClickListener {
+        val binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+
+        binding.button.setOnClickListener {
             Toaster.pop(
                 this,
                 "A simple toast message",
@@ -17,7 +20,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        with_image_button.setOnClickListener {
+        binding.withImageButton.setOnClickListener {
             Toaster.pop(
                 this,
                 "A simple toast message with image",
@@ -26,7 +29,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        builder_button.setOnClickListener {
+        binding.builderButton.setOnClickListener {
             val toastBuilder = Toaster.Builder(this)
                 .setMessage("File uploaded successfully")
                 .setLeftDrawable(R.drawable.ic_baseline_cloud_done_24)
@@ -36,7 +39,7 @@ class MainActivity : AppCompatActivity() {
             Toaster.pop(toastBuilder.make()).show()
         }
 
-        error_button.setOnClickListener {
+        binding.errorButton.setOnClickListener {
             Toaster.popError(
                 this,
                 "This is an error message",
@@ -44,7 +47,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        warning_button.setOnClickListener {
+        binding.warningButton.setOnClickListener {
             Toaster.popWarning(
                 this,
                 "This is a warning message",
@@ -52,7 +55,7 @@ class MainActivity : AppCompatActivity() {
             ).show()
         }
 
-        success_button.setOnClickListener {
+        binding.successButton.setOnClickListener {
             Toaster.popSuccess(
                 this,
                 "This is a success message",
