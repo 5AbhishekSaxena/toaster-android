@@ -65,11 +65,11 @@ It has some predefined templates for common use-cases like warning, error and su
   ##### Using templates
    - Success
   ```
-  	Toaster.popError(
-                this,
-                "This is an error message",
-                Toaster.LENGTH_SHORT
-            ).show()
+  	Toaster.popSuccess(
+                    this,
+                    "This is a success message",
+                    Toaster.LENGTH_SHORT
+                ).show()
   ```
   
   <img src="https://user-images.githubusercontent.com/19958130/90525085-7b635580-e18c-11ea-8bbf-5aeffb49bd11.jpeg" width="280">
