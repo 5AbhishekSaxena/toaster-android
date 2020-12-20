@@ -1,6 +1,7 @@
 package tech.developingdeveloper.toaster
 
 import android.content.Context
+import android.os.Build
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.ImageView
@@ -8,6 +9,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import tech.developingdeveloper.toaster.utils.Colors
 
 
 /**
@@ -46,10 +48,14 @@ class Toaster private constructor(
         }
 
         fun pop(toaster: Toaster): Toast {
-            val toast = Toast(toaster.context)
-            toast.duration = toaster.duration
-            toast.view = toaster.rootView
-            return toast
+            return if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q) {
+                Toast(toaster.context).apply {
+                    duration = toaster.duration
+                    view = toaster.rootView
+                }
+            } else {
+                Toast.makeText(toaster.context, toaster.message, toaster.duration)
+            }
         }
 
         fun popSuccess(
@@ -97,7 +103,11 @@ class Toaster private constructor(
                 .make()
         }
 
-        private fun prepareSuccess(context: Context, message: CharSequence, duration: Int): Toaster {
+        private fun prepareSuccess(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toaster {
             return Builder(context)
                 .setMessage(message)
                 .setLeftDrawable(R.drawable.ic_baseline_check_circle_24)
@@ -107,7 +117,11 @@ class Toaster private constructor(
                 .make()
         }
 
-        private fun prepareWarning(context: Context, message: CharSequence, duration: Int): Toaster {
+        private fun prepareWarning(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toaster {
             return Builder(context)
                 .setMessage(message)
                 .setLeftDrawable(R.drawable.ic_baseline_warning_24)
@@ -194,14 +208,6 @@ class Toaster private constructor(
             colorStripView?.visibility = View.GONE
             leftDrawableImageView?.visibility = View.GONE
             messageTextView?.visibility = View.GONE
-        }
-    }
-
-    private interface Colors {
-        companion object {
-            internal val SUCCESS = R.color.dirty_green
-            internal val WARNING = R.color.dirty_yellow
-            internal val ERROR = R.color.red
         }
     }
 }
