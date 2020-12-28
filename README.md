@@ -8,6 +8,8 @@
 Toaster-Android is a simple open source library to customize toast messages in android applications.
 It has some predefined templates for common use-cases like warning, error and success messages.
 
+<a href="https://www.buymeacoffee.com/abhisheksaxena" target="_blank"><img src="https://cdn.buymeacoffee.com/buttons/v2/default-yellow.png" alt="Buy Me A Coffee" width="160" ></a>
+
  ## Download
 
   #### Step 1
