@@ -28,9 +28,11 @@ It has some predefined templates for common use-cases like warning, error and su
  
   ```
  dependencies {
-	implementation 'tech.developingdeveloper:toaster-android:2.1.0'
+ 		implementation 'tech.developingdeveloper.toaster-android:toaster:2.3.0'
+    	implementation 'tech.developingdeveloper.toaster-android:toaster-ktx:2.3.0' //for ktx support
 }
    ```
+   *Please Note:* toaster-ktx includes toaster module so, if you are using toaster-ktx version then you don't have to add taoster
   
  ## How to use Toaster-Android
   Video:
@@ -99,8 +101,8 @@ It has some predefined templates for common use-cases like warning, error and su
   <img src="https://user-images.githubusercontent.com/19958130/90441972-7a341900-e0f7-11ea-87f9-1cd10c912167.jpeg" width="230">
   
   ##### Custom Toast
-  1. Create a toast buidler
-  ```
+  1. Create a toast builder
+  ```kotlin
         val toastBuilder = Toaster.Builder(this)
                 .setMessage("File uploaded successfully")
                 .setLeftDrawable(R.drawable.ic_baseline_cloud_done_24)
@@ -109,10 +111,42 @@ It has some predefined templates for common use-cases like warning, error and su
                 .setDuration(Toaster.LENGTH_SHORT)
   ``` 
   2. Add the builder to the `Toaster.pop`  
-  ```
+  ```kotlin
       Toaster.pop(toastBuilder.make()).show()
   ```
   <img src="https://user-images.githubusercontent.com/19958130/90525146-91711600-e18c-11ea-8e26-3c862a483e95.jpeg" width="240">
+
+  ##### Custom Toast (toaster-ktx)
+  With the toaster-ktx, you can either make `Taoster` or directly create `Toast` with the provided functions.
+  1. Create `Taoster` and then poping it. 
+    
+   - Create `Taoster` usign ktx
+   ```kotlin
+   val toaster = ToasterBuilderKtx.prepareToaster(this) {
+		message = "File uploaded successfully"
+		leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
+		leftDrawableTint = R.color.blue
+		stripTint = R.color.blue
+		duration = Toaster.LENGTH_SHORT
+   }
+   Toaster.pop(toaster).show()
+   ```
+   - Pop the Toast
+   ```kotlin
+   Toaster.pop(toaster).show()
+   ```
+  2. Directly make `Toast` and show it
+   ```kotlin
+   ToasterBuilderKtx.prepareToast(this) { 
+        	message = "File uploaded successfully" 
+	    	leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
+	    	leftDrawableTint = R.color.blue
+	    	stripTint = R.color.blue
+	    	duration = Toaster.LENGTH_SHORT
+   }.show()
+   ```
+   <img src="https://user-images.githubusercontent.com/19958130/90525146-91711600-e18c-11ea-8e26-3c862a483e95.jpeg" width="240">
+   
     
  ## Contributing
   - For contributions in this repository, please read [Contribution guidelines for this project](/CONTRIBUTING.md) first. (Please pull the changes from this repo if you have already forked the repository and are facing conflicts)
