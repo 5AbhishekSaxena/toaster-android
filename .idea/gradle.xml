@@ -13,6 +13,7 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/toaster" />
+            <option value="$PROJECT_DIR$/toaster/toaster-ktx" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
