@@ -18,11 +18,9 @@ class ToasterBuilderKtx private constructor(private val context: Context) {
     @DrawableRes
     var leftDrawableRes: Int = DEFAULT_VALUE
 
-    @ColorInt
     @ColorRes
     var leftDrawableTint: Int = DEFAULT_VALUE
 
-    @ColorInt
     @ColorRes
     var stripTint: Int = DEFAULT_VALUE
 

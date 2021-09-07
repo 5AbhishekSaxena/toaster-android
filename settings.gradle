@@ -1,4 +1,4 @@
 include ':toaster'
 include ':app'
 rootProject.name = "ToasterExample"
-include ':toaster:toaster-ktx'
+include ':toaster-ktx'
