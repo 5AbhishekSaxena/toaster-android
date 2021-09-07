@@ -28,7 +28,7 @@ It has some predefined templates for common use-cases like warning, error and su
  
   ```
  dependencies {
-	implementation 'tech.developingdeveloper:toaster-android:2.0.0'
+	implementation 'tech.developingdeveloper:toaster-android:2.1.0'
 }
    ```
   
