@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import tech.developingdeveloper.toaster.defaults.ErrorToaster
 import tech.developingdeveloper.toaster.defaults.SuccessToaster
 import tech.developingdeveloper.toaster.defaults.WarningToaster
-import tech.developingdeveloper.toaster.utils.Colors
 
 
 /**
@@ -33,6 +32,24 @@ class Toaster private constructor(
         const val LENGTH_SHORT = Toast.LENGTH_SHORT
         const val LENGTH_LONG = Toast.LENGTH_LONG
 
+        /**
+         * Used to create a [Toast] that has some default values based on the supplied [toasterType].
+         */
+        fun popDefault(
+            context: Context,
+            message: CharSequence,
+            duration: Int,
+            toasterType: DefaultToasterType,
+        ): Toast {
+            val defaultToaster = when(toasterType) {
+                DefaultToasterType.SUCCESS -> SuccessToaster.create(context, message, duration)
+                DefaultToasterType.WARNING -> WarningToaster.create(context, message, duration)
+                DefaultToasterType.ERROR -> ErrorToaster.create(context, message, duration)
+            }
+
+            return pop(defaultToaster)
+        }
+
         fun pop(
             context: Context,
             message: CharSequence,
@@ -51,30 +68,6 @@ class Toaster private constructor(
             } else {
                 Toast.makeText(toaster.context, toaster.message, toaster.duration)
             }
-        }
-
-        fun popSuccess(
-            context: Context,
-            message: CharSequence,
-            duration: Int,
-        ): Toast {
-            return pop(SuccessToaster.create(context, message, duration))
-        }
-
-        fun popWarning(
-            context: Context,
-            message: CharSequence,
-            duration: Int,
-        ): Toast {
-            return pop(WarningToaster.create(context, message, duration))
-        }
-
-        fun popError(
-            context: Context,
-            message: CharSequence,
-            duration: Int,
-        ): Toast {
-            return pop(ErrorToaster.create(context, message, duration))
         }
 
         private fun prepare(
