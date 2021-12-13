@@ -11,12 +11,12 @@ internal object SuccessToaster : DefaultToaster {
         message: CharSequence,
         duration: Int,
     ): Toaster {
-        return Toaster.Builder(context)
-            .setMessage(message)
-            .setLeftDrawable(R.drawable.ic_baseline_check_circle_24)
-            .setLeftDrawableTint(Colors.SUCCESS)
-            .setStripTint(Colors.SUCCESS)
-            .setDuration(duration)
-            .make()
+        return Toaster.Config(
+            message = message,
+            leftDrawableRes = R.drawable.ic_baseline_check_circle_24,
+            leftDrawableTint = Colors.SUCCESS,
+            stripTint = Colors.SUCCESS,
+            duration = duration,
+        ).make(context)
     }
 }

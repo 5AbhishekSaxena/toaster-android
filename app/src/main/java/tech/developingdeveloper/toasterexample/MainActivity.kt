@@ -31,13 +31,15 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.builderButton.setOnClickListener {
-            val toastBuilder = Toaster.Builder(this)
-                .setMessage("File uploaded successfully")
-                .setLeftDrawable(R.drawable.ic_baseline_cloud_done_24)
-                .setLeftDrawableTint(R.color.blue)
-                .setStripTint(R.color.blue)
-                .setDuration(Toaster.LENGTH_SHORT)
-            Toaster.pop(toastBuilder.make()).show()
+            val toaster = Toaster.Config(
+                message = "File uploaded successfully",
+                leftDrawableRes = R.drawable.ic_baseline_cloud_done_24,
+                leftDrawableTint = R.color.blue,
+                stripTint = R.color.blue,
+                duration = Toaster.LENGTH_SHORT,
+            ).make(this)
+
+            Toaster.pop(toaster).show()
         }
 
         binding.errorButton.setOnClickListener {
