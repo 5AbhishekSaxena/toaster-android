@@ -9,6 +9,9 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
+import tech.developingdeveloper.toaster.defaults.ErrorToaster
+import tech.developingdeveloper.toaster.defaults.SuccessToaster
+import tech.developingdeveloper.toaster.defaults.WarningToaster
 import tech.developingdeveloper.toaster.utils.Colors
 
 
@@ -53,25 +56,25 @@ class Toaster private constructor(
         fun popSuccess(
             context: Context,
             message: CharSequence,
-            duration: Int
+            duration: Int,
         ): Toast {
-            return pop(prepareSuccess(context, message, duration))
+            return pop(SuccessToaster.create(context, message, duration))
         }
 
         fun popWarning(
             context: Context,
             message: CharSequence,
-            duration: Int
+            duration: Int,
         ): Toast {
-            return pop(prepareWarning(context, message, duration))
+            return pop(WarningToaster.create(context, message, duration))
         }
 
         fun popError(
             context: Context,
             message: CharSequence,
-            duration: Int
+            duration: Int,
         ): Toast {
-            return pop(prepareError(context, message, duration))
+            return pop(ErrorToaster.create(context, message, duration))
         }
 
         private fun prepare(
@@ -87,44 +90,6 @@ class Toaster private constructor(
                         setLeftDrawable(it)
                     }
                 }
-                .setDuration(duration)
-                .make()
-        }
-
-        private fun prepareSuccess(
-            context: Context,
-            message: CharSequence,
-            duration: Int
-        ): Toaster {
-            return Builder(context)
-                .setMessage(message)
-                .setLeftDrawable(R.drawable.ic_baseline_check_circle_24)
-                .setLeftDrawableTint(Colors.SUCCESS)
-                .setStripTint(Colors.SUCCESS)
-                .setDuration(duration)
-                .make()
-        }
-
-        private fun prepareWarning(
-            context: Context,
-            message: CharSequence,
-            duration: Int
-        ): Toaster {
-            return Builder(context)
-                .setMessage(message)
-                .setLeftDrawable(R.drawable.ic_baseline_warning_24)
-                .setLeftDrawableTint(Colors.WARNING)
-                .setStripTint(Colors.WARNING)
-                .setDuration(duration)
-                .make()
-        }
-
-        private fun prepareError(context: Context, message: CharSequence, duration: Int): Toaster {
-            return Builder(context)
-                .setMessage(message)
-                .setLeftDrawable(R.drawable.ic_baseline_error_24)
-                .setLeftDrawableTint(Colors.ERROR)
-                .setStripTint(Colors.ERROR)
                 .setDuration(duration)
                 .make()
         }
