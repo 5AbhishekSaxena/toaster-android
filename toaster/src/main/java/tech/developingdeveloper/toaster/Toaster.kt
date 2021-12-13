@@ -33,18 +33,10 @@ class Toaster private constructor(
         fun pop(
             context: Context,
             message: CharSequence,
-            duration: Int
+            duration: Int,
+            drawableRes: Int? = null,
         ): Toast {
-            return pop(prepare(context, message, duration))
-        }
-
-        fun pop(
-            context: Context,
-            message: CharSequence,
-            drawableRes: Int,
-            duration: Int
-        ): Toast {
-            return pop(prepare(context, message, drawableRes, duration))
+            return pop(prepare(context, message, duration, drawableRes))
         }
 
         fun pop(toaster: Toaster): Toast {
@@ -82,15 +74,11 @@ class Toaster private constructor(
             return pop(prepareError(context, message, duration))
         }
 
-        private fun prepare(context: Context, message: CharSequence, duration: Int): Toaster {
-            return prepare(context, message, null, duration)
-        }
-
         private fun prepare(
             context: Context,
             message: CharSequence,
-            drawableRes: Int?,
-            duration: Int
+            duration: Int,
+            drawableRes: Int? = null,
         ): Toaster {
             return Builder(context)
                 .setMessage(message)
