@@ -10,8 +10,8 @@ internal object ErrorToaster : DefaultToaster {
         return Toaster.Config(
             message = message,
             leftDrawableRes = R.drawable.ic_baseline_warning_24,
-            leftDrawableTint = Colors.WARNING,
-            stripTint = Colors.WARNING,
+            leftDrawableTint = Colors.ERROR,
+            stripTint = Colors.ERROR,
             duration = duration,
         ).make(context)
     }
