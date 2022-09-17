@@ -43,7 +43,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.errorButton.setOnClickListener {
-            Toaster.popDefault(
+            Toaster.pop(
                 context = this,
                 message = "This is an error message",
                 duration = Toaster.LENGTH_SHORT,
@@ -52,7 +52,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.warningButton.setOnClickListener {
-            Toaster.popDefault(
+            Toaster.pop(
                 context = this,
                 message = "This is a warning message",
                 duration = Toaster.LENGTH_SHORT,
@@ -61,7 +61,7 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.successButton.setOnClickListener {
-            Toaster.popDefault(
+            Toaster.pop(
                 context = this,
                 message = "This is a success message",
                 duration = Toaster.LENGTH_SHORT,
