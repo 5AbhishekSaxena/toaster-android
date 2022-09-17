@@ -33,10 +33,20 @@ class Toaster private constructor(
         const val LENGTH_SHORT = Toast.LENGTH_SHORT
         const val LENGTH_LONG = Toast.LENGTH_LONG
 
+        fun pop(
+            context: Context,
+            message: CharSequence,
+            duration: Int,
+            drawableRes: Int? = null,
+        ): Toast {
+            val toaster = prepare(context, message, duration, drawableRes)
+            return pop(toaster)
+        }
+
         /**
          * Used to create a [Toast] that has some default values based on the supplied [toasterType].
          */
-        fun popDefault(
+        fun pop(
             context: Context,
             message: CharSequence,
             duration: Int,
@@ -46,15 +56,6 @@ class Toaster private constructor(
                 DefaultToasterFactory.create(context, message, duration, toasterType)
 
             return pop(defaultToaster)
-        }
-
-        fun pop(
-            context: Context,
-            message: CharSequence,
-            duration: Int,
-            drawableRes: Int? = null,
-        ): Toast {
-            return pop(prepare(context, message, duration, drawableRes))
         }
 
         fun pop(toaster: Toaster): Toast {
