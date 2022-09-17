@@ -2,7 +2,6 @@ package tech.developingdeveloper.toasterexample
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import tech.developingdeveloper.toaster.DefaultToasterType
 import tech.developingdeveloper.toaster.Toaster
 import tech.developingdeveloper.toasterexample.databinding.ActivityMainBinding
 
@@ -31,41 +30,36 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.builderButton.setOnClickListener {
-            val toaster = Toaster.Config(
-                message = "File uploaded successfully",
-                leftDrawableRes = R.drawable.ic_baseline_cloud_done_24,
-                leftDrawableTint = R.color.blue,
-                stripTint = R.color.blue,
-                duration = Toaster.LENGTH_SHORT,
-            ).make(this)
-
-            Toaster.pop(toaster).show()
+            val toastBuilder = Toaster.Builder(this)
+                .setMessage("File uploaded successfully")
+                .setLeftDrawable(R.drawable.ic_baseline_cloud_done_24)
+                .setLeftDrawableTint(R.color.blue)
+                .setStripTint(R.color.blue)
+                .setDuration(Toaster.LENGTH_SHORT)
+            Toaster.pop(toastBuilder.make()).show()
         }
 
         binding.errorButton.setOnClickListener {
-            Toaster.popDefault(
-                context = this,
-                message = "This is an error message",
-                duration = Toaster.LENGTH_SHORT,
-                toasterType = DefaultToasterType.ERROR,
+            Toaster.popError(
+                this,
+                "This is an error message",
+                Toaster.LENGTH_SHORT
             ).show()
         }
 
         binding.warningButton.setOnClickListener {
-            Toaster.popDefault(
-                context = this,
-                message = "This is a warning message",
-                duration = Toaster.LENGTH_SHORT,
-                toasterType = DefaultToasterType.WARNING,
+            Toaster.popWarning(
+                this,
+                "This is a warning message",
+                Toaster.LENGTH_SHORT
             ).show()
         }
 
         binding.successButton.setOnClickListener {
-            Toaster.popDefault(
-                context = this,
-                message = "This is a success message",
-                duration = Toaster.LENGTH_SHORT,
-                toasterType = DefaultToasterType.SUCCESS,
+            Toaster.popSuccess(
+                this,
+                "This is a success message",
+                Toaster.LENGTH_SHORT
             ).show()
         }
     }

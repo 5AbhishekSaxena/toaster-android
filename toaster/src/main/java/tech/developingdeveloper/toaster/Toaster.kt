@@ -7,12 +7,9 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.annotation.ColorRes
-import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import tech.developingdeveloper.toaster.defaults.DefaultToasterFactory
-import tech.developingdeveloper.toaster.utils.visibleIf
+import tech.developingdeveloper.toaster.utils.Colors
 
 
 /**
@@ -33,28 +30,21 @@ class Toaster private constructor(
         const val LENGTH_SHORT = Toast.LENGTH_SHORT
         const val LENGTH_LONG = Toast.LENGTH_LONG
 
-        /**
-         * Used to create a [Toast] that has some default values based on the supplied [toasterType].
-         */
-        fun popDefault(
+        fun pop(
             context: Context,
             message: CharSequence,
-            duration: Int,
-            toasterType: DefaultToasterType,
+            duration: Int
         ): Toast {
-            val defaultToaster =
-                DefaultToasterFactory.create(context, message, duration, toasterType)
-
-            return pop(defaultToaster)
+            return pop(prepare(context, message, duration))
         }
 
         fun pop(
             context: Context,
             message: CharSequence,
-            duration: Int,
-            drawableRes: Int? = null,
+            drawableRes: Int,
+            duration: Int
         ): Toast {
-            return pop(prepare(context, message, duration, drawableRes))
+            return pop(prepare(context, message, drawableRes, duration))
         }
 
         fun pop(toaster: Toaster): Toast {
@@ -68,74 +58,156 @@ class Toaster private constructor(
             }
         }
 
+        fun popSuccess(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toast {
+            return pop(prepareSuccess(context, message, duration))
+        }
+
+        fun popWarning(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toast {
+            return pop(prepareWarning(context, message, duration))
+        }
+
+        fun popError(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toast {
+            return pop(prepareError(context, message, duration))
+        }
+
+        private fun prepare(context: Context, message: CharSequence, duration: Int): Toaster {
+            return prepare(context, message, null, duration)
+        }
+
         private fun prepare(
             context: Context,
             message: CharSequence,
-            duration: Int,
-            drawableRes: Int? = null,
+            drawableRes: Int?,
+            duration: Int
         ): Toaster {
-            return Config(
-                message = message,
-                leftDrawableRes = drawableRes,
-                duration = duration,
-            ).make(context)
+            return Builder(context)
+                .setMessage(message)
+                .apply {
+                    drawableRes?.let {
+                        setLeftDrawable(it)
+                    }
+                }
+                .setDuration(duration)
+                .make()
+        }
+
+        private fun prepareSuccess(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .setLeftDrawable(R.drawable.ic_baseline_check_circle_24)
+                .setLeftDrawableTint(Colors.SUCCESS)
+                .setStripTint(Colors.SUCCESS)
+                .setDuration(duration)
+                .make()
+        }
+
+        private fun prepareWarning(
+            context: Context,
+            message: CharSequence,
+            duration: Int
+        ): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .setLeftDrawable(R.drawable.ic_baseline_warning_24)
+                .setLeftDrawableTint(Colors.WARNING)
+                .setStripTint(Colors.WARNING)
+                .setDuration(duration)
+                .make()
+        }
+
+        private fun prepareError(context: Context, message: CharSequence, duration: Int): Toaster {
+            return Builder(context)
+                .setMessage(message)
+                .setLeftDrawable(R.drawable.ic_baseline_error_24)
+                .setLeftDrawableTint(Colors.ERROR)
+                .setStripTint(Colors.ERROR)
+                .setDuration(duration)
+                .make()
         }
     }
 
-    /**
-     * In Kotlin, since we can have default parameters, we have less of a need for a builder pattern.
-     *
-     * We can create a single data class that has a property for every customizable field, and then
-     * in [make] we can read our properties and configure our view based on that.
-     */
-    data class Config(
-        private var message: CharSequence = "",
-        private var duration: Int = LENGTH_SHORT,
-        @DrawableRes
-        private var leftDrawableRes: Int? = null,
-        @ColorRes
-        private var leftDrawableTint: Int? = null,
-        @ColorRes
-        private var stripTint: Int? = null,
-    ) {
-        fun make(context: Context): Toaster {
-            return Toaster(context, message, duration).also {
-                it.rootView = buildView(context)
-                it.leftDrawableRes = leftDrawableRes
-            }
+    class Builder(private val context: Context) {
+
+        private val rootView: View
+        private var messageTextView: TextView? = null
+        private var leftDrawableImageView: ImageView? = null
+        private var leftDrawableRes: Int? = null
+        private var colorStripView: View? = null
+
+        private var message: CharSequence = ""
+        private var duration: Int = LENGTH_SHORT
+
+        init {
+            rootView = initView(context)
         }
 
-        /**
-         * Creates a [View] for a [Toaster] that matches this [Config].
-         */
-        private fun buildView(context: Context): View {
+        private fun initView(context: Context): View {
             val inflater =
                 context.getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
             val rootView = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
 
-            val messageTextView: TextView = rootView.findViewById(R.id.message_text_view)
-            val leftDrawableImageView: ImageView =
-                rootView.findViewById(R.id.left_drawable_image_view)
-            val colorStripView: View = rootView.findViewById(R.id.color_strip_view)
+            messageTextView = rootView.findViewById(R.id.message_text_view)
+            leftDrawableImageView = rootView.findViewById(R.id.left_drawable_image_view)
+            colorStripView = rootView.findViewById(R.id.color_strip_view)
 
-            messageTextView.text = this.message
-            messageTextView.visibleIf(this.message.isNotEmpty())
-
-            leftDrawableRes?.let(leftDrawableImageView::setImageResource)
-            leftDrawableImageView.visibleIf(leftDrawableRes != null)
-
-            val tintColor = this.leftDrawableTint?.let { tintRes ->
-                ContextCompat.getColor(context, tintRes)
-            }
-            tintColor?.let(leftDrawableImageView::setColorFilter)
-
-            val stripColor = this.stripTint?.let { tintRes ->
-                ContextCompat.getColor(context, tintRes)
-            }
-            stripColor?.let(colorStripView::setBackgroundColor)
-            colorStripView.visibleIf(stripColor != null)
+            setInitViewProperties()
 
             return rootView
+        }
+
+        fun setMessage(message: CharSequence) = apply {
+            this.message = message
+            messageTextView?.text = message
+            messageTextView?.visibility = View.VISIBLE
+        }
+
+        fun setLeftDrawable(leftDrawableRes: Int) = apply {
+            this.leftDrawableRes = leftDrawableRes
+            leftDrawableImageView?.setImageResource(leftDrawableRes)
+            leftDrawableImageView?.visibility = View.VISIBLE
+        }
+
+        fun setDuration(duration: Int) = apply {
+            this.duration = duration
+        }
+
+        fun setLeftDrawableTint(colorRes: Int) = apply {
+            leftDrawableImageView?.setColorFilter(ContextCompat.getColor(context, colorRes))
+            leftDrawableImageView?.visibility = View.VISIBLE
+        }
+
+        fun setStripTint(colorRes: Int) = apply {
+            colorStripView?.setBackgroundColor(ContextCompat.getColor(this.context, colorRes))
+            colorStripView?.visibility = View.VISIBLE
+        }
+
+        fun make(): Toaster {
+            return Toaster(context, message, duration).also {
+                it.rootView = rootView
+                it.leftDrawableRes = leftDrawableRes
+            }
+        }
+
+        private fun setInitViewProperties() {
+            colorStripView?.visibility = View.GONE
+            leftDrawableImageView?.visibility = View.GONE
+            messageTextView?.visibility = View.GONE
         }
     }
 }

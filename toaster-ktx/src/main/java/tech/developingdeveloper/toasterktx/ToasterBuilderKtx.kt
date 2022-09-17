@@ -28,13 +28,20 @@ class ToasterBuilderKtx private constructor(private val context: Context) {
     var duration: Int = Toaster.LENGTH_SHORT
 
     private fun prepare(): Toaster {
-        return Toaster.Config(
-            message = message,
-            duration = duration,
-            leftDrawableRes = leftDrawableRes.takeIf { it != DEFAULT_VALUE },
-            leftDrawableTint = leftDrawableTint.takeIf { it != DEFAULT_VALUE },
-            stripTint = stripTint.takeIf { it != DEFAULT_VALUE },
-        ).make(context)
+        val toasterBuilder = Toaster.Builder(context)
+            .setMessage(message)
+            .setDuration(duration)
+
+        if (leftDrawableRes != DEFAULT_VALUE)
+            toasterBuilder.setLeftDrawable(leftDrawableRes)
+
+        if (leftDrawableTint != DEFAULT_VALUE)
+            toasterBuilder.setLeftDrawableTint(leftDrawableTint)
+
+        if (stripTint != DEFAULT_VALUE)
+            toasterBuilder.setStripTint(stripTint)
+
+        return toasterBuilder.make()
     }
 
     companion object {
