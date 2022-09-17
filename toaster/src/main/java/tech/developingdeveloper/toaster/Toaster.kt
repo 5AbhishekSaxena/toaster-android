@@ -11,9 +11,7 @@ import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.ContextCompat
-import tech.developingdeveloper.toaster.defaults.ErrorToaster
-import tech.developingdeveloper.toaster.defaults.SuccessToaster
-import tech.developingdeveloper.toaster.defaults.WarningToaster
+import tech.developingdeveloper.toaster.defaults.DefaultToasterFactory
 import tech.developingdeveloper.toaster.utils.visibleIf
 
 
@@ -44,11 +42,8 @@ class Toaster private constructor(
             duration: Int,
             toasterType: DefaultToasterType,
         ): Toast {
-            val defaultToaster = when (toasterType) {
-                DefaultToasterType.SUCCESS -> SuccessToaster.create(context, message, duration)
-                DefaultToasterType.WARNING -> WarningToaster.create(context, message, duration)
-                DefaultToasterType.ERROR -> ErrorToaster.create(context, message, duration)
-            }
+            val defaultToaster =
+                DefaultToasterFactory.create(context, message, duration, toasterType)
 
             return pop(defaultToaster)
         }
@@ -119,7 +114,8 @@ class Toaster private constructor(
             val rootView = inflater.inflate(R.layout.layout_toast, ConstraintLayout(context), false)
 
             val messageTextView: TextView = rootView.findViewById(R.id.message_text_view)
-            val leftDrawableImageView: ImageView = rootView.findViewById(R.id.left_drawable_image_view)
+            val leftDrawableImageView: ImageView =
+                rootView.findViewById(R.id.left_drawable_image_view)
             val colorStripView: View = rootView.findViewById(R.id.color_strip_view)
 
             messageTextView.text = this.message
