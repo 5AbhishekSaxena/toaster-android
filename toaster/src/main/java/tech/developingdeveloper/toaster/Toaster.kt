@@ -39,7 +39,8 @@ class Toaster private constructor(
             duration: Int,
             drawableRes: Int? = null,
         ): Toast {
-            return pop(prepare(context, message, duration, drawableRes))
+            val toaster = prepare(context, message, duration, drawableRes)
+            return pop(toaster)
         }
 
         /**
