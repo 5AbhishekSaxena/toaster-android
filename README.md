@@ -28,8 +28,8 @@ It has some predefined templates for common use-cases like warning, error and su
  
   ```
  dependencies {
- 		implementation 'tech.developingdeveloper.toaster-android:toaster:2.3.0'
-    	implementation 'tech.developingdeveloper.toaster-android:toaster-ktx:2.3.0' //for ktx support
+ 		implementation 'com.github.5AbhishekSaxena.toaster-android:toaster:2.3.0'
+    	implementation 'com.github.5AbhishekSaxena.toaster-android:toaster-ktx:2.3.0' //for ktx support
 }
    ```
    *Please Note:* toaster-ktx includes toaster module so, if you are using toaster-ktx version then you don't have to add taoster
