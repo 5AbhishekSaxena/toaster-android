@@ -4,7 +4,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import tech.developingdeveloper.toaster.Toaster
 import tech.developingdeveloper.toasterexample.databinding.ActivityMainBinding
-import tech.developingdeveloper.toasterktx.ToasterBuilderKtx
+import tech.developingdeveloper.toasterktx.prepareToast
+import tech.developingdeveloper.toasterktx.prepareToaster
 
 
 /**
@@ -22,7 +23,7 @@ class KtxExampleActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         binding.builderButton.setOnClickListener {
-            val toaster = ToasterBuilderKtx.prepareToaster(this) {
+            val toaster = prepareToaster(this) {
                 message = "File uploaded successfully"
                 leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
                 leftDrawableTint = R.color.blue
@@ -34,7 +35,7 @@ class KtxExampleActivity : AppCompatActivity() {
 
             // or
 
-            ToasterBuilderKtx.prepareToast(this) {
+            prepareToast(this) {
                 message = "File uploaded successfully"
                 leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
                 leftDrawableTint = R.color.blue

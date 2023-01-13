@@ -1,8 +1,6 @@
 package tech.developingdeveloper.toasterktx
 
 import android.content.Context
-import android.widget.Toast
-import androidx.annotation.ColorInt
 import androidx.annotation.ColorRes
 import androidx.annotation.DrawableRes
 import tech.developingdeveloper.toaster.Toaster
@@ -13,7 +11,7 @@ import tech.developingdeveloper.toaster.Toaster
  * @since 07-09-2021 12:01
  */
 
-class ToasterBuilderKtx private constructor(private val context: Context) {
+class ToasterBuilderKtx internal constructor(private val context: Context) {
 
     @DrawableRes
     var leftDrawableRes: Int = DEFAULT_VALUE
@@ -27,7 +25,7 @@ class ToasterBuilderKtx private constructor(private val context: Context) {
     var message: CharSequence = ""
     var duration: Int = Toaster.LENGTH_SHORT
 
-    private fun prepare(): Toaster {
+    internal fun prepare(): Toaster {
         return Toaster.Config(
             message = message,
             duration = duration,
@@ -39,21 +37,5 @@ class ToasterBuilderKtx private constructor(private val context: Context) {
 
     companion object {
         private const val DEFAULT_VALUE = -1
-
-        fun prepareToast(
-            context: Context,
-            block: ToasterBuilderKtx.() -> Unit
-        ): Toast {
-            val toaster = prepareToaster(context, block)
-            return Toaster.pop(toaster)
-        }
-
-        fun prepareToaster(
-            context: Context,
-            block: ToasterBuilderKtx.() -> Unit
-        ): Toaster {
-            val toastBuilder = ToasterBuilderKtx(context).apply(block)
-            return toastBuilder.prepare()
-        }
     }
 }
