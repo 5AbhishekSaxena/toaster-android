@@ -14,7 +14,7 @@ It has some predefined templates for common use-cases like warning, error and su
 
   #### Step 1
   Add the JitPack repository to your `build.gradle(project)`.
-  ```
+  ```Groovy
  allprojects {
 	repositories {
 		...
@@ -26,10 +26,10 @@ It has some predefined templates for common use-cases like warning, error and su
   #### Step 2
   Add the dependency to your `build.gradle(Module: app)`.
  
-  ```
+  ```Groovy
  dependencies {
- 		implementation 'com.github.5AbhishekSaxena.toaster-android:toaster:2.3.0'
-    	implementation 'com.github.5AbhishekSaxena.toaster-android:toaster-ktx:2.3.0' //for ktx support
+	implementation 'com.github.5AbhishekSaxena.toaster-android:toaster:2.3.1'
+	implementation 'com.github.5AbhishekSaxena.toaster-android:toaster-ktx:2.3.1' //for ktx support
 }
    ```
    *Please Note:* toaster-ktx includes toaster module so, if you are using toaster-ktx version then you don't have to add taoster
@@ -101,18 +101,19 @@ It has some predefined templates for common use-cases like warning, error and su
   <img src="https://user-images.githubusercontent.com/19958130/90441972-7a341900-e0f7-11ea-87f9-1cd10c912167.jpeg" width="230">
   
   ##### Custom Toast
-  1. Create a toast builder
+  1. Create a toast config
   ```kotlin
-        val toastBuilder = Toaster.Builder(this)
-                .setMessage("File uploaded successfully")
-                .setLeftDrawable(R.drawable.ic_baseline_cloud_done_24)
-                .setLeftDrawableTint(R.color.blue)
-                .setStripTint(R.color.blue)
-                .setDuration(Toaster.LENGTH_SHORT)
+        val toastConfig = Toaster.Config(
+                message = "File uploaded successfully",
+                leftDrawableRes = R.drawable.ic_baseline_cloud_done_24,
+                leftDrawableTint = R.color.blue,
+                stripTint = R.color.blue,
+                duration = Toaster.LENGTH_SHORT,
+            )
   ``` 
-  2. Add the builder to the `Toaster.pop`  
+  2. Add the config to the `Toaster.pop`  
   ```kotlin
-      Toaster.pop(toastBuilder.make()).show()
+      Toaster.pop(toastConfig.make(context)).show()
   ```
   <img src="https://user-images.githubusercontent.com/19958130/90525146-91711600-e18c-11ea-8e26-3c862a483e95.jpeg" width="240">
 
@@ -122,13 +123,13 @@ It has some predefined templates for common use-cases like warning, error and su
     
    - Create `Taoster` usign ktx
    ```kotlin
-   val toaster = ToasterBuilderKtx.prepareToaster(this) {
-		message = "File uploaded successfully"
-		leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
-		leftDrawableTint = R.color.blue
-		stripTint = R.color.blue
-		duration = Toaster.LENGTH_SHORT
-   }
+   val toaster = prepareToaster(this) {
+                message = "File uploaded successfully"
+                leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
+                leftDrawableTint = R.color.blue
+                stripTint = R.color.blue
+                duration = Toaster.LENGTH_SHORT
+            }
    Toaster.pop(toaster).show()
    ```
    - Pop the Toast
@@ -137,13 +138,13 @@ It has some predefined templates for common use-cases like warning, error and su
    ```
   2. Directly make `Toast` and show it
    ```kotlin
-   ToasterBuilderKtx.prepareToast(this) { 
-        	message = "File uploaded successfully" 
-	    	leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
-	    	leftDrawableTint = R.color.blue
-	    	stripTint = R.color.blue
-	    	duration = Toaster.LENGTH_SHORT
-   }.show()
+   prepareToast(this) {
+                message = "File uploaded successfully"
+                leftDrawableRes = R.drawable.ic_baseline_cloud_done_24
+                leftDrawableTint = R.color.blue
+                stripTint = R.color.blue
+                duration = Toaster.LENGTH_SHORT
+    }.show()
    ```
    <img src="https://user-images.githubusercontent.com/19958130/90525146-91711600-e18c-11ea-8e26-3c862a483e95.jpeg" width="240">
    
